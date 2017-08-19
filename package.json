@@ -1,8 +1,8 @@
 {
   "name": "hardbox",
-  "version": "1.1.0",
-  "description": "Security Proxy",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "Modular Reverse Proxy System",
+  "main": "server.js",
   "repository": "git@github.com:akayami/hardbox.git",
   "author": "Tomasz Rakowski <tomasz@akayami.com>",
   "license": "MIT",
