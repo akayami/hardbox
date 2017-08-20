@@ -1,4 +1,22 @@
-const config = Object.freeze(require('plain-config')());
+#!/usr/bin/env node
+
+const program = require('commander');
+
+let init = ['conf/config.js', 'conf/config-local.js', '/etc/hardbox/config.js'];
+
+program
+	.version('0.1.0')
+	.arguments('<configFile...>')
+	.action(function(c) {
+		init = c
+	})
+program.parse(process.argv);
+
+const config = Object.freeze(require('plain-config')(init, {
+	strict: false,
+	debug: false
+}));
+
 const bunyan = require('bunyan');
 
 global.logger = bunyan.createLogger(config.bunyan);
