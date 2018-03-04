@@ -1,11 +1,11 @@
-var c = require('../lib/controller');
+const c = require('../lib/controller');
 const server = require('http')
 const request = require('request')
 const fs = require('fs-extra');
 const path = require('path')
 
-var testRoot = '/tmp/hadbox-test'
-var confPath = path.join(testRoot, 'conf.d/');
+const testRoot = '/tmp/hadbox-test'
+const confPath = path.join(testRoot, 'conf.d/');
 
 let socket = '/tmp/hardbox-unit'
 

@@ -12,6 +12,7 @@ program
 	})
 program.parse(process.argv);
 
+
 const config = Object.freeze(require('plain-config')(init, {
 	strict: false,
 	debug: false
@@ -22,8 +23,8 @@ const bunyan = require('bunyan');
 global.logger = bunyan.createLogger(config.bunyan);
 require('console2log/bunyan').attach(global.logger).disableConsole(true);
 
-var cluster = require('cluster');
-var numCPUs = require('os').cpus().length;
+const cluster = require('cluster');
+const numCPUs = require('os').cpus().length;
 
 
 const Propagator = require('./lib/propagator');
@@ -31,10 +32,13 @@ const Propagator = require('./lib/propagator');
 const stack = [];
 const propagator = new Propagator(stack);
 
+//console.log(config);
+
 
 if (cluster.isMaster) {
 
 	require('./lib/controller')(propagator, config.controller, function(err, res) {
+
 
 		function newWorker() {
 			var worker = cluster.fork();
@@ -72,5 +76,6 @@ if (cluster.isMaster) {
 
 	})
 } else {
+	console.log('starting');
 	require('./index.js');
 }

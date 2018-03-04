@@ -31,7 +31,7 @@ function load(oStack, handler) {
 				delete require.cache[m];
 				let vh = require(m);
 				console.info('Loading vhost: ' + vh.name);
-				let ovh = new vhost(vh);
+				let ovh = new vhost(vh, config.node.global_path);
 				if(portMap[ovh.config.vhost.port] && portMap[ovh.config.vhost.port] != ovh.config.vhost.protocol) {
 					throw new Error('Invalid configuration. Requested port already used by a different protocol: ' + ovh.config.vhost.port + ' mapped to ' + portMap[ovh.config.vhost.port])
 				}

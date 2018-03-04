@@ -23,4 +23,9 @@ config.controller = {
 	}
 };
 
+
+config.node = {
+	global_path: '/usr/lib/node_modules'
+};
+
 module.exports = config;
