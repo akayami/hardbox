@@ -29,7 +29,7 @@
     "mocha": "^5.0.1"
   },
   "bin": {
-    "hardbox": "./hardbox"
+    "hardbox": "./hardbox-start"
   },
   "preferGlobal": true
 }
