@@ -1,6 +1,6 @@
 {
   "name": "hardbox",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Modular Reverse Proxy System",
   "main": "server.js",
   "repository": "git@github.com:akayami/hardbox.git",
