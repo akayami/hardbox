@@ -9,7 +9,7 @@ program
 	.arguments('<configFile...>')
 	.action(function(c) {
 		init = c
-	})
+	});
 program.parse(process.argv);
 
 
@@ -76,6 +76,5 @@ if (cluster.isMaster) {
 
 	})
 } else {
-	console.log('starting');
-	require('./index.js');
+	require('./index.js')(config);
 }
