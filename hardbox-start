@@ -2,7 +2,8 @@
 
 const program = require('commander');
 
-let init = ['conf/config.js', 'conf/config-local.js', '/etc/hardbox/config.js'];
+//let init = ['/etc/hardbox/config.js', 'conf/config.js', 'conf/config-local.js'];
+let init = ['conf/config.js', 'conf/config-local.js'];
 
 program
 	.version('0.1.0')
@@ -12,6 +13,8 @@ program
 	});
 program.parse(process.argv);
 
+
+console.log(init);
 
 const config = Object.freeze(require('plain-config')(init, {
 	strict: false,
