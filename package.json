@@ -10,7 +10,7 @@
     "async": "^2.6.1",
     "body-parser": "^1.18.3",
     "bunyan": "^2.0.2",
-    "commander": "^2.15.1",
+    "commander": "^2.20.0",
     "connect-redis": "^3.4.1",
     "console2log": "^0.0.3",
     "ejs": "^2.6.1",

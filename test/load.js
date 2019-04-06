@@ -5,18 +5,20 @@ const request = require('request');
 const mockRequest = require('mock-req-res').mockRequest;
 const mockResponse = require('mock-req-res').mockResponse;
 
-describe('Loading...', function () {
+describe('lib/load.js - Basic route management', function () {
 	
 	
 	it('Basic route handling without modules', (done) => {
 		
 		//let config = {};
+
+		let port = 8018;
 		
 		let oStack = {
 			list: [
 				new vhost({
 					name: 'test',
-					vhost: 'http://testdomain.local/',
+					vhost: `http://localhost:${port}/`,
 					target: 'http://localhost:3000'
 				})
 			]
@@ -30,7 +32,7 @@ describe('Loading...', function () {
 			if(s) s.close();
 		});
 		
-		s = require('http').createServer(handler).listen(80, (err) => {
+		s = require('http').createServer(handler).listen(port, (err) => {
 				if (err) {
 					console.error(err);
 					done(err);
@@ -40,7 +42,7 @@ describe('Loading...', function () {
 					
 					res.end = (message) => {
 						if (res.statusCode !== 503) {
-							done('Bad Response code')
+							done('Bad Response code: ' + res.statusCode + ' message ' + message);
 						} else {
 							done();
 						}
@@ -53,7 +55,7 @@ describe('Loading...', function () {
 								encrypted: false
 							},
 							headers: {
-								host: 'testdomain.local'
+								host: `localhost:${port}`
 							}
 						}, res);
 				}
