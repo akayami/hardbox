@@ -2,6 +2,8 @@ const config = {};
 
 config.morgan = 'tiny'; // tiny/combined etc.
 
+config.workers = 1;
+
 // Sets up app output library (stdout and such)
 config.bunyan = {
 	name: 'hardbox',

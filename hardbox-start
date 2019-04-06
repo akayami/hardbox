@@ -14,7 +14,7 @@ program
 program.parse(process.argv);
 
 
-console.log(init);
+//console.log(init);
 
 const config = Object.freeze(require('plain-config')(init, {
 	strict: false,
@@ -37,13 +37,16 @@ const Propagator = require('./lib/propagator');
 const stack = [];
 const propagator = new Propagator(stack);
 
-//console.log(config);
-
+// console.log(config);
+// console.log(cluster.isMaster, workers);
 
 if (cluster.isMaster) {
 
 	require('./lib/controller')(propagator, config.controller, function(err, res) {
 
+		if(err) {
+			console.error(err);
+		}
 
 		function newWorker() {
 			var worker = cluster.fork();
@@ -55,7 +58,7 @@ if (cluster.isMaster) {
 				} else {
 					console.log('worker success!');
 				}
-			})
+			});
 			return worker;
 		}
 
