@@ -10,4 +10,4 @@ module.exports = function(config) {
 	//config.log.directory = '/tmp/stats2';
 	
 	return config;
-}
+};

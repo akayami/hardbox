@@ -12,9 +12,9 @@ describe('lib/load.js - Basic route management', function () {
 		
 		//let config = {};
 
-		let port = 8018;
+		const port = 8018;
 		
-		let oStack = {
+		const oStack = {
 			list: [
 				new vhost({
 					name: 'test',
@@ -24,7 +24,7 @@ describe('lib/load.js - Basic route management', function () {
 			]
 		};
 		
-		let handler = require('../lib/router.js')(oStack);
+		const handler = require('../lib/router.js')(oStack);
 		
 		let s;
 		
@@ -33,32 +33,32 @@ describe('lib/load.js - Basic route management', function () {
 		});
 		
 		s = require('http').createServer(handler).listen(port, (err) => {
-				if (err) {
-					console.error(err);
-					done(err);
-				} else {
+			if (err) {
+				console.error(err);
+				done(err);
+			} else {
 					
-					let res = {};
+				const res = {};
 					
-					res.end = (message) => {
-						if (res.statusCode !== 503) {
-							done('Bad Response code: ' + res.statusCode + ' message ' + message);
-						} else {
-							done();
+				res.end = (message) => {
+					if (res.statusCode !== 503) {
+						done('Bad Response code: ' + res.statusCode + ' message ' + message);
+					} else {
+						done();
+					}
+				};
+					
+				handler(
+					{
+						url: '/',
+						connection: {
+							encrypted: false
+						},
+						headers: {
+							host: `localhost:${port}`
 						}
-					};
-					
-					handler(
-						{
-							url: '/',
-							connection: {
-								encrypted: false
-							},
-							headers: {
-								host: `localhost:${port}`
-							}
-						}, res);
-				}
-			})
+					}, res);
+			}
+		});
 	});
 });

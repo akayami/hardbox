@@ -1,13 +1,13 @@
 const c = require('../lib/controller');
-const server = require('http')
-const request = require('request')
+const server = require('http');
+const request = require('request');
 const fs = require('fs-extra');
-const path = require('path')
+const path = require('path');
 
-const testRoot = '/tmp/hadbox-test'
+const testRoot = '/tmp/hadbox-test';
 const confPath = path.join(testRoot, 'conf.d/');
 
-let socket = '/tmp/hardbox-unit'
+const socket = '/tmp/hardbox-unit';
 
 const Propagator = require('../lib/propagator');
 
@@ -33,8 +33,8 @@ describe('Test controller', function() {
 			}, function(err, r) {
 				done(err);
 			});
-		})
-	})
+		});
+	});
 
 	afterEach(function(done) {
 		stack.close(function(err) {
@@ -43,9 +43,9 @@ describe('Test controller', function() {
 			}
 			fs.remove(testRoot, function(err) {
 				return done(err);
-			})
-		})
-	})
+			});
+		});
+	});
 
 	// it('Needs to startup with a path endpoint', function(done) {
 	// 	request.put('http://unix:/tmp/hardbox:/vhost/set/vhost/key.value.sdsd/value',function(error, response, body) {
@@ -109,9 +109,9 @@ describe('Test controller', function() {
 				if (response.statusCode == 200) {
 					done();
 				} else {
-					done(response.statusCode)
+					done(response.statusCode);
 				}
 			}
 		});
-	})
-})
+	});
+});

@@ -3,28 +3,29 @@
 
 module.exports = (config) => {
 
-// Holds vhost instances
-	let oStack = {
+	// Holds vhost instances
+	const oStack = {
 		list: []
 	};
 
-// Holds all servers associed with their ports
-	let serverList = {};
+	// Holds all servers associed with their ports
+	const serverList = {};
 
-	var handler = require('./lib/router.js')(oStack);
+	const handler = require('./lib/router.js')(oStack);
 
-	require('./lib/load')(config, oStack, serverList, handler);
+	const load = require('./lib/load');
+	load(config, oStack, serverList, handler);
 	
 	//load(oStack, serverList, handler);
 
 	process.on('message', function (msg) {
 		switch (msg.action) {
-			case "reload":
-				load(oStack, handler);
-				break;
-			default:
-				console.warn('Unknown inter-process message received: ' + msg.action);
-				break;
+		case 'reload':
+			load(config, oStack, serverList, handler);
+			break;
+		default:
+			console.warn('Unknown inter-process message received: ' + msg.action);
+			break;
 		}
-	})
-}
+	});
+};
