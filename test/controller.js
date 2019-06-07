@@ -47,19 +47,19 @@ describe('Test controller', function() {
 		});
 	});
 
-	// it('Needs to startup with a path endpoint', function(done) {
-	// 	request.put('http://unix:/tmp/hardbox:/vhost/set/vhost/key.value.sdsd/value',function(error, response, body) {
-	// 		if (error) {
-	// 			done(error);
-	// 		} else {
-	// 			if (response.statusCode == 200) {
-	// 				done();
-	// 			} else {
-	// 				done(response.statusCode)
-	// 			}
-	// 		}
-	// 	});
-	// })
+	it('Needs to startup with a path endpoint', function(done) {
+		request.put(`http://unix:${socket}:/vhost/set/vhost/key.value.sdsd/value`,function(error, response, body) {
+			if (error) {
+				done(error);
+			} else {
+				if (response.statusCode == 404) {
+					done();
+				} else {
+					done(response.statusCode);
+				}
+			}
+		});
+	});
 
 	it('Needs to reload', function(done) {
 		fs.writeFileSync(path.join(confPath, 'file1.js'), `
