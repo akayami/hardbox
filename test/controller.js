@@ -52,7 +52,7 @@ describe('Test controller', function() {
 			if (error) {
 				done(error);
 			} else {
-				if (response.statusCode == 404) {
+				if (response.statusCode === 404) {
 					done();
 				} else {
 					done(response.statusCode);
@@ -106,7 +106,7 @@ describe('Test controller', function() {
 			if (error) {
 				done(error);
 			} else {
-				if (response.statusCode == 200) {
+				if (response.statusCode === 200) {
 					done();
 				} else {
 					done(response.statusCode);

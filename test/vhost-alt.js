@@ -2,10 +2,9 @@ const assert = require('assert');
 const vhost = require('../lib/vhost');
 const request = require('request');
 
-const mockRequest = require('mock-req-res').mockRequest;
-const mockResponse = require('mock-req-res').mockResponse;
+// Does this test make sense ?
 
-describe('lib/load.js - Basic route management', function () {
+describe('lib/vhost.js - Basic vhost setup', function () {
 	
 	
 	it('Basic route handling without modules', (done) => {
