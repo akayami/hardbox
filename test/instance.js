@@ -43,5 +43,5 @@ describe('Testing server', () => {
 	
 	it('Needs to start and stop', (done) => {
 		done();
-	})
+	});
 });

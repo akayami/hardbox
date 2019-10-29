@@ -14,22 +14,38 @@ program
 program.parse(process.argv);
 
 
-//console.log(init);
+//console.info(init);
 
 const config = Object.freeze(require('plain-config')(init, {
 	strict: false,
 	debug: false
 }));
 
-const bunyan = require('bunyan');
 
-global.logger = bunyan.createLogger(config.bunyan);
-require('console2log/bunyan').attach(global.logger).disableConsole(true);
+const pino = require('pino');
+const logger = pino();
+//logger.child({test: 'a'}).log('test');
+
+//logger.log = logger.info;
+console = logger;
+
+//logger.child().log('hello');
+
+// const { Console } = require('console');
+// console = new Console({ stdout: process.stdout, stderr: process.stderr });
+global.logger = console;
+
+//console.info('Test', {id: 10});
+
+// const bunyan = require('bunyan');
+//
+// global.logger = bunyan.createLogger(config.bunyan);
+// require('console2log/bunyan').attach(global.logger).disableConsole(true);
 
 const cluster = require('cluster');
 //const numCPUs = require('os').cpus().length;
 
-const workers = config.workers || require('os').cpus().length
+const workers = config.workers || require('os').cpus().length;
 
 
 const Propagator = require('./lib/propagator');
@@ -37,8 +53,8 @@ const Propagator = require('./lib/propagator');
 const stack = [];
 const propagator = new Propagator(stack);
 
-// console.log(config);
-// console.log(cluster.isMaster, workers);
+// console.info(config);
+// console.info(cluster.isMaster, workers);
 
 if (cluster.isMaster) {
 
@@ -52,11 +68,11 @@ if (cluster.isMaster) {
 			var worker = cluster.fork();
 			worker.on('exit', function(code, signal) {
 				if (signal) {
-					console.log(`Worker killed by signal: ${signal}`);
+					console.info(`Worker killed by signal: ${signal}`);
 				} else if (code !== 0) {
-					console.log(`worker exited with error code: ${code}`);
+					console.info(`worker exited with error code: ${code}`);
 				} else {
-					console.log('worker success!');
+					console.info('worker success!');
 				}
 			});
 			return worker;
@@ -77,8 +93,8 @@ if (cluster.isMaster) {
 			var oldPID = deadWorker.process.pid;
 
 			// Log the event
-			console.log('worker ' + oldPID + ' died.');
-			console.log('worker ' + newPID + ' born.');
+			console.info('worker ' + oldPID + ' died.');
+			console.info('worker ' + newPID + ' born.');
 
 		});
 

@@ -46,7 +46,7 @@ config.controller = {
 				]
 			}
 		],
-//		path: __dirname + '/vhost/'
+		//		path: __dirname + '/vhost/'
 	}
 };
 
@@ -56,12 +56,12 @@ config.node = {
 
 let p;
 
-describe("Test Load function", () => {
+describe('Test Load function', () => {
 	
-	it("Basic Start/Stop", (done) => {
-		let oStack = {}, serverList = {};
+	it('Basic Start/Stop', (done) => {
+		const oStack = {}, serverList = {};
 		p = loader(config, oStack, serverList, (req, res) => {
-			console.log('Handler called', req, res);
+			console.info('Handler called', req, res);
 		});
 		p.load();
 		p.close();
@@ -69,9 +69,9 @@ describe("Test Load function", () => {
 	});
 	
 	
-	it("Send Request", (done) => {
+	it('Send Request', (done) => {
 		
-		let oStack = {}, serverList = {};
+		const oStack = {}, serverList = {};
 		p = loader(config, oStack, serverList, (req, res) => {
 			res.end();
 			done();

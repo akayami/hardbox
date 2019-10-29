@@ -16,19 +16,21 @@ module.exports = (config) => {
 	const loader = require('./lib/loader')(config, oStack, serverList, handler);
 	loader.load();
 	
+	//console.info('Test', {id: 10});
+	
 	//load(oStack, serverList, handler);
 	
 	process.on('message', function (msg) {
 		switch (msg.action) {
-			case 'reload':
-				loader.load();
-				break;
-			case 'stop':
-				loader.close();
-				break;
-			default:
-				console.warn('Unknown inter-process message received: ' + msg.action);
-				break;
+		case 'reload':
+			loader.load();
+			break;
+		case 'stop':
+			loader.close();
+			break;
+		default:
+			console.warn('Unknown inter-process message received: ' + msg.action);
+			break;
 		}
 	});
 	
