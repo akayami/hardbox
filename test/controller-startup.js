@@ -83,7 +83,7 @@ describe('Test controller startup routine', function () {
 			}
 		}, function (err, r) {
 			stack.close(() => {
-				expect(err.code).equal('EACCES');
+				expect(err.code).be.be.oneOf(['EACCES', 'EROFS']);
 				done();
 			});
 		});
