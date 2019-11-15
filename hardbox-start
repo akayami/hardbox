@@ -9,7 +9,7 @@ program
 	.version('0.1.0')
 	.arguments('<configFile...>')
 	.action(function(c) {
-		init = c
+		init = c;
 	});
 program.parse(process.argv);
 
@@ -27,13 +27,13 @@ const logger = pino();
 //logger.child({test: 'a'}).log('test');
 
 //logger.log = logger.info;
-console = logger;
+//console = logger;
 
 //logger.child().log('hello');
 
 // const { Console } = require('console');
 // console = new Console({ stdout: process.stdout, stderr: process.stderr });
-global.logger = console;
+global.logger = logger;
 
 //console.info('Test', {id: 10});
 
@@ -97,8 +97,7 @@ if (cluster.isMaster) {
 			console.info('worker ' + newPID + ' born.');
 
 		});
-
-	})
+	});
 } else {
 	require('./index.js')(config);
 }

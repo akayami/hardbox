@@ -38,7 +38,7 @@ config.controller = {
 				},
 				modules: [
 					{
-						name: '/Users/tomasz.rakowski/dev/hardbox-proxy',
+						name: __dirname + '/./lib/mock-module.js',
 						config: {
 							target: 'localhost:2300'
 						}
